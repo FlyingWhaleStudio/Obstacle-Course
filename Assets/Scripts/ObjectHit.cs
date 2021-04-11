@@ -12,7 +12,10 @@ public class ObjectHit : MonoBehaviour
     void Start()
     {
         renderer1 = GetComponent<MeshRenderer>();
-        renderer2 = other.GetComponent<MeshRenderer>();
+        if (other != null)
+        {
+            renderer2 = other.GetComponent<MeshRenderer>();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -20,7 +23,12 @@ public class ObjectHit : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             renderer1.material.color = Color.red;
-            renderer2.material.color = Color.red;
+
+            if (other != null)
+            {
+                renderer2.material.color = Color.red;
+            }
+
             gameObject.tag = "Hit";
         }
     }
